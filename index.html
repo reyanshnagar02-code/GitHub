@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>World Cup Match Summaries</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-ball">⚽</span>
+        <h1>World Cup <span>Match Central</span></h1>
+      </div>
+      <p class="tagline">Every match, summed up in plain English.</p>
+    </div>
+    <div class="header-blob header-blob--1"></div>
+    <div class="header-blob header-blob--2"></div>
+    <div class="header-blob header-blob--3"></div>
+  </header>
+
+  <main>
+    <section class="stats-strip" id="statsStrip">
+      <!-- filled by script.js -->
+    </section>
+
+    <section class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by team, stadium, or player..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="filter-wrap" id="stageFilters">
+        <!-- filled by script.js -->
+      </div>
+    </section>
+
+    <section class="matches-grid" id="matchesGrid">
+      <!-- match cards injected by script.js -->
+    </section>
+
+    <p class="empty-state" id="emptyState" hidden>
+      😕 No matches found. Try a different search or filter.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      ⚽ Built for fans, by fans. Match data in this demo is sample
+      placeholder data — swap in real results in
+      <code>matches.js</code>.
+    </p>
+  </footer>
+
+  <script src="matches.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
