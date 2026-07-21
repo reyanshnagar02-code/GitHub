@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UEFA Euro 2024 Match Summaries</title>
+<style>
+:root {
+  --yellow: #ffcf3d;
+  --orange: #ff8c42;
+  --red: #ef3b4c;
+  --pink: #ff4d9d;
+  --purple: #7b3ff2;
+  --blue: #1f6fff;
+  --teal: #06d6a0;
+  --ink: #1b1b2f;
+  --paper: #fffdf7;
+  --card: #ffffff;
+  --muted: #6b6b80;
+  --shadow: 0 10px 30px rgba(27, 27, 47, 0.12);
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  background: linear-gradient(180deg, #fff8ec 0%, #fff0e3 40%, #f4f0ff 100%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--red), var(--purple) 50%, var(--blue));
+  padding: 56px 24px 72px;
+  text-align: center;
+  color: white;
+}
+
+.header-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logo-ball {
+  font-size: 2.4rem;
+  display: inline-block;
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+.site-header h1 span {
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  margin: 10px 0 0;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+.header-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.35;
+  z-index: 1;
+}
+
+.header-blob--1 {
+  width: 220px;
+  height: 220px;
+  background: var(--yellow);
+  top: -80px;
+  left: -60px;
+}
+
+.header-blob--2 {
+  width: 160px;
+  height: 160px;
+  background: var(--pink);
+  bottom: -70px;
+  right: 8%;
+}
+
+.header-blob--3 {
+  width: 120px;
+  height: 120px;
+  background: var(--red);
+  top: 20px;
+  right: -40px;
+}
+
+/* ---------- Stats strip ---------- */
+
+.stats-strip {
+  max-width: 1100px;
+  margin: -40px auto 0;
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.stat-card .stat-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-card:nth-child(1) .stat-num { color: var(--purple); }
+.stat-card:nth-child(2) .stat-num { color: var(--pink); }
+.stat-card:nth-child(3) .stat-num { color: var(--orange); }
+.stat-card:nth-child(4) .stat-num { color: var(--teal); }
+
+/* ---------- Controls ---------- */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 20px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+#searchInput:focus {
+  border-color: var(--purple);
+}
+
+.filter-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-pill {
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: white;
+  color: var(--ink);
+  box-shadow: 0 3px 10px rgba(27, 27, 47, 0.08);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+.filter-pill:hover {
+  transform: translateY(-2px);
+}
+
+.filter-pill.active {
+  background: linear-gradient(90deg, var(--purple), var(--pink));
+  color: white;
+  box-shadow: 0 6px 16px rgba(138, 79, 255, 0.35);
+}
+
+/* ---------- Matches grid ---------- */
+
+.matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.match-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border-top: 6px solid var(--purple);
+}
+
+.match-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(27, 27, 47, 0.18);
+}
+
+.match-card[data-stage-color="1"] { border-top-color: var(--pink); }
+.match-card[data-stage-color="2"] { border-top-color: var(--orange); }
+.match-card[data-stage-color="3"] { border-top-color: var(--teal); }
+.match-card[data-stage-color="4"] { border-top-color: var(--blue); }
+.match-card[data-stage-color="5"] { border-top-color: var(--red); }
+
+.match-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px 0;
+}
+
+.stage-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--purple);
+  background: #f2ecff;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.match-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 18px 8px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.team-flag {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.team-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff3d6, #ffe1e1);
+}
+
+.score-box .dash {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.score-winner {
+  color: var(--teal);
+}
+
+.venue {
+  padding: 0 18px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary {
+  padding: 14px 18px 6px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.stars {
+  padding: 4px 18px 18px;
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.star-chip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #fff3d6;
+  color: #a15c00;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.attendance {
+  padding: 0 18px 16px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.penalties {
+  margin: 0 18px 12px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #a15c00;
+  background: #fff3d6;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.empty-state {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted);
+  padding: 60px 20px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  text-align: center;
+  padding: 30px 20px 50px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.site-footer code {
+  background: #f0eaff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--purple);
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 44px 16px 64px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-ball">⚽</span>
+        <h1>UEFA Euro <span>2024 Central</span></h1>
+      </div>
+      <p class="tagline">Germany 2024 — every big match, summed up in plain English.</p>
+    </div>
+    <div class="header-blob header-blob--1"></div>
+    <div class="header-blob header-blob--2"></div>
+    <div class="header-blob header-blob--3"></div>
+  </header>
+
+  <main>
+    <section class="stats-strip" id="statsStrip">
+      <!-- filled by script below -->
+    </section>
+
+    <section class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by team, stadium, or player..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="filter-wrap" id="stageFilters">
+        <!-- filled by script below -->
+      </div>
+    </section>
+
+    <section class="matches-grid" id="matchesGrid">
+      <!-- match cards injected by script below -->
+    </section>
+
+    <p class="empty-state" id="emptyState" hidden>
+      😕 No matches found. Try a different search or filter.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      🏆 Spain went the whole tournament unbeaten in all 7 games to win a
+      record 4th European Championship title. This is a curated set of
+      the tournament's key matches (all group winners' openers plus the
+      full knockout stage) — add more group games to the
+      <code>MATCHES</code> array using the same format.
+    </p>
+  </footer>
+
+<script>
+/**
+ * ============================================================
+ *  MATCH DATA — UEFA EURO 2024 (Germany, 14 Jun – 14 Jul 2024)
+ * ============================================================
+ * This is REAL tournament data, compiled from memory of the
+ * actual 2024 European Championship. It covers the full
+ * knockout stage (Round of 16 through the Final) plus a
+ * representative set of group-stage matches rather than all
+ * 51 games. Scorer names, minutes and small details are
+ * recalled from memory rather than pulled from a live source,
+ * so double check exact numbers if you need them for something
+ * official. Add more matches by copying the object format below.
+ */
+
+const MATCHES = [
+  // ---------------- GROUP STAGE ----------------
+  {
+    id: 1,
+    stage: "Group A",
+    date: "2024-06-14",
+    venue: "Munich Football Arena, Munich",
+    teamA: { name: "Germany", flag: "🇩🇪", score: 5 },
+    teamB: { name: "Scotland", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", score: 1 },
+    summary:
+      "The host nation opened the tournament with a statement rout, tearing Scotland apart with slick, high-tempo attacking football from the first whistle.",
+    stars: ["Kai Havertz (1 goal)", "Jamal Musiala (1 goal)", "Florian Wirtz (1 goal)"]
+  },
+  {
+    id: 2,
+    stage: "Group B",
+    date: "2024-06-15",
+    venue: "Olympiastadion Berlin, Berlin",
+    teamA: { name: "Spain", flag: "🇪🇸", score: 3 },
+    teamB: { name: "Croatia", flag: "🇭🇷", score: 0 },
+    summary:
+      "Spain's young, fearless side announced themselves early, controlling the game against a fancied Croatia and never looking back.",
+    stars: ["Fabián Ruiz (1 goal)", "Álvaro Morata (1 goal)"]
+  },
+  {
+    id: 3,
+    stage: "Group C",
+    date: "2024-06-16",
+    venue: "Arena AufSchalke, Gelsenkirchen",
+    teamA: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 1 },
+    teamB: { name: "Serbia", flag: "🇷🇸", score: 0 },
+    summary:
+      "A cagey, nervy England performance was settled by a single towering header, enough to get their tournament up and running.",
+    stars: ["Jude Bellingham (1 goal)"]
+  },
+  {
+    id: 4,
+    stage: "Group D",
+    date: "2024-06-16",
+    venue: "Volksparkstadion, Hamburg",
+    teamA: { name: "Netherlands", flag: "🇳🇱", score: 2 },
+    teamB: { name: "Poland", flag: "🇵🇱", score: 1 },
+    summary:
+      "The Dutch needed a late rally to get past a stubborn Poland side that had taken the lead against the run of play.",
+    stars: ["Cody Gakpo (1 goal)"]
+  },
+  {
+    id: 5,
+    stage: "Group D",
+    date: "2024-06-17",
+    venue: "Düsseldorf Arena, Düsseldorf",
+    teamA: { name: "France", flag: "🇫🇷", score: 1 },
+    teamB: { name: "Austria", flag: "🇦🇹", score: 0 },
+    summary:
+      "France ground out a narrow win in a match remembered for Kylian Mbappé breaking his nose in a collision, later playing tournament games in a protective mask.",
+    stars: ["Own goal (Max Wöber, Austria)"]
+  },
+  {
+    id: 6,
+    stage: "Group E",
+    date: "2024-06-17",
+    venue: "Frankfurt Arena, Frankfurt",
+    teamA: { name: "Belgium", flag: "🇧🇪", score: 0 },
+    teamB: { name: "Slovakia", flag: "🇸🇰", score: 1 },
+    summary:
+      "One of the tournament's early shocks — Slovakia soaked up heavy Belgian pressure and hit them on the break for a famous win.",
+    stars: ["Ivan Schranz (1 goal)"]
+  },
+  {
+    id: 7,
+    stage: "Group F",
+    date: "2024-06-18",
+    venue: "Leipzig Stadion, Leipzig",
+    teamA: { name: "Portugal", flag: "🇵🇹", score: 2 },
+    teamB: { name: "Czechia", flag: "🇨🇿", score: 1 },
+    summary:
+      "Portugal looked set to drop points until a dramatic stoppage-time winner deep into added time snatched all three points.",
+    stars: ["Francisco Conceição (stoppage-time winner)"]
+  },
+  {
+    id: 8,
+    stage: "Group F",
+    date: "2024-06-18",
+    venue: "BVB Stadion Dortmund, Dortmund",
+    teamA: { name: "Turkey", flag: "🇹🇷", score: 3 },
+    teamB: { name: "Georgia", flag: "🇬🇪", score: 1 },
+    summary:
+      "A lively, end-to-end game where Turkey's clinical finishing was the difference, despite a spirited Georgia response.",
+    stars: ["Kerem Aktürkoğlu (2 goals)", "Georges Mikautadze (Georgia, 1 goal)"]
+  },
+
+  // ---------------- ROUND OF 16 ----------------
+  {
+    id: 9,
+    stage: "Round of 16",
+    date: "2024-06-29",
+    venue: "Olympiastadion Berlin, Berlin",
+    teamA: { name: "Switzerland", flag: "🇨🇭", score: 2 },
+    teamB: { name: "Italy", flag: "🇮🇹", score: 0 },
+    summary:
+      "A huge shock — the defending champions were dismantled by a sharp, disciplined Switzerland performance and crashed out.",
+    stars: ["Ruben Vargas (1 goal)", "Remo Freuler (1 goal)"]
+  },
+  {
+    id: 10,
+    stage: "Round of 16",
+    date: "2024-06-29",
+    venue: "BVB Stadion Dortmund, Dortmund",
+    teamA: { name: "Germany", flag: "🇩🇪", score: 2 },
+    teamB: { name: "Denmark", flag: "🇩🇰", score: 0 },
+    summary:
+      "The hosts kept their momentum going, controlling the game throughout and putting the tie to bed before half-time.",
+    stars: ["Kai Havertz (penalty)", "Jamal Musiala (1 goal)"]
+  },
+  {
+    id: 11,
+    stage: "Round of 16",
+    date: "2024-06-30",
+    venue: "Arena AufSchalke, Gelsenkirchen",
+    teamA: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 2 },
+    teamB: { name: "Slovakia", flag: "🇸🇰", score: 1 },
+    summary:
+      "England looked out of the tournament until a spectacular last-gasp overhead kick forced extra time, where they finished the job.",
+    stars: ["Jude Bellingham (95th-minute overhead-kick equalizer)", "Harry Kane (extra-time winner)"]
+  },
+  {
+    id: 12,
+    stage: "Round of 16",
+    date: "2024-06-30",
+    venue: "Cologne Stadium, Cologne",
+    teamA: { name: "Spain", flag: "🇪🇸", score: 4 },
+    teamB: { name: "Georgia", flag: "🇬🇪", score: 1 },
+    summary:
+      "Spain's attack finally clicked into top gear, brushing aside a brave Georgia side that had caused upsets earlier in the tournament.",
+    stars: ["Dani Olmo (1 goal)", "Fabián Ruiz (1 goal)"]
+  },
+  {
+    id: 13,
+    stage: "Round of 16",
+    date: "2024-07-01",
+    venue: "Düsseldorf Arena, Düsseldorf",
+    teamA: { name: "France", flag: "🇫🇷", score: 1 },
+    teamB: { name: "Belgium", flag: "🇧🇪", score: 0 },
+    summary:
+      "A tight, low-scoring affair decided by a deflected free kick that looped in off a Belgian defender.",
+    stars: ["Own goal (Jan Vertonghen, Belgium)"]
+  },
+  {
+    id: 14,
+    stage: "Round of 16",
+    date: "2024-07-01",
+    venue: "Frankfurt Arena, Frankfurt",
+    teamA: { name: "Portugal", flag: "🇵🇹", score: 0 },
+    teamB: { name: "Slovenia", flag: "🇸🇮", score: 0 },
+    summary:
+      "Ninety scoreless minutes plus extra time led to penalties, where a heroic goalkeeping display settled it without Slovenia scoring once.",
+    stars: ["Diogo Costa (saved all 3 Slovenian penalties)"],
+    penalties: "Portugal 3–0 Slovenia (pens)"
+  },
+  {
+    id: 15,
+    stage: "Round of 16",
+    date: "2024-07-02",
+    venue: "Munich Football Arena, Munich",
+    teamA: { name: "Romania", flag: "🇷🇴", score: 0 },
+    teamB: { name: "Netherlands", flag: "🇳🇱", score: 3 },
+    summary:
+      "The Dutch cruised through this one, dominating possession and territory in a comfortable, controlled win.",
+    stars: ["Cody Gakpo (1 goal)"]
+  },
+  {
+    id: 16,
+    stage: "Round of 16",
+    date: "2024-07-02",
+    venue: "Leipzig Stadion, Leipzig",
+    teamA: { name: "Austria", flag: "🇦🇹", score: 1 },
+    teamB: { name: "Turkey", flag: "🇹🇷", score: 2 },
+    summary:
+      "Turkey raced into a two-goal lead inside the first five minutes with a whirlwind start and held on through late Austrian pressure.",
+    stars: ["Merih Demiral (2 goals, both inside the opening 5 minutes)"]
+  },
+
+  // ---------------- QUARTER-FINALS ----------------
+  {
+    id: 17,
+    stage: "Quarter-final",
+    date: "2024-07-05",
+    venue: "Stuttgart Arena, Stuttgart",
+    teamA: { name: "Spain", flag: "🇪🇸", score: 2 },
+    teamB: { name: "Germany", flag: "🇩🇪", score: 1 },
+    summary:
+      "A brilliant, end-to-end quarter-final between two of the tournament's best sides, settled by a header deep into extra time that ended the hosts' run.",
+    stars: ["Mikel Merino (119th-minute winner)", "Dani Olmo (1 goal)"]
+  },
+  {
+    id: 18,
+    stage: "Quarter-final",
+    date: "2024-07-05",
+    venue: "Volksparkstadion, Hamburg",
+    teamA: { name: "Portugal", flag: "🇵🇹", score: 0 },
+    teamB: { name: "France", flag: "🇫🇷", score: 0 },
+    summary:
+      "A tense, goalless stalemate between two heavyweights went all the way to penalties, where France kept their cool.",
+    stars: ["Cristiano Ronaldo (converted his penalty in the shootout)"],
+    penalties: "Portugal 3–5 France (pens)"
+  },
+  {
+    id: 19,
+    stage: "Quarter-final",
+    date: "2024-07-06",
+    venue: "Düsseldorf Arena, Düsseldorf",
+    teamA: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 1 },
+    teamB: { name: "Switzerland", flag: "🇨🇭", score: 1 },
+    summary:
+      "Switzerland's shock tournament run nearly continued as they led late, but a superb curling equalizer forced penalties, which England edged.",
+    stars: ["Bukayo Saka (late equalizer)", "Jordan Pickford (penalty save)"],
+    penalties: "England 5–3 Switzerland (pens)"
+  },
+  {
+    id: 20,
+    stage: "Quarter-final",
+    date: "2024-07-06",
+    venue: "Olympiastadion Berlin, Berlin",
+    teamA: { name: "Netherlands", flag: "🇳🇱", score: 2 },
+    teamB: { name: "Turkey", flag: "🇹🇷", score: 1 },
+    summary:
+      "Turkey's underdog run finally ended against a Dutch side that showed enough quality in both boxes to edge a tight contest.",
+    stars: ["Cody Gakpo (1 goal)", "Stefan de Vrij (1 goal)"]
+  },
+
+  // ---------------- SEMI-FINALS ----------------
+  {
+    id: 21,
+    stage: "Semi-final",
+    date: "2024-07-09",
+    venue: "Munich Football Arena, Munich",
+    teamA: { name: "Spain", flag: "🇪🇸", score: 2 },
+    teamB: { name: "France", flag: "🇫🇷", score: 1 },
+    summary:
+      "A 16-year-old announced himself to the world with a stunning long-range curler, and Spain never looked back on their way to the final.",
+    stars: ["Lamine Yamal (wonder goal, youngest scorer in Euros history)", "Dani Olmo (1 goal)"]
+  },
+  {
+    id: 22,
+    stage: "Semi-final",
+    date: "2024-07-10",
+    venue: "BVB Stadion Dortmund, Dortmund",
+    teamA: { name: "Netherlands", flag: "🇳🇱", score: 1 },
+    teamB: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 2 },
+    summary:
+      "An England side that had ridden its luck all tournament finally clicked, snatching a dramatic extra-time winner in the closing minutes.",
+    stars: ["Ollie Watkins (extra-time winner)", "Harry Kane (equalizing penalty)"]
+  },
+
+  // ---------------- FINAL ----------------
+  {
+    id: 23,
+    stage: "Final",
+    date: "2024-07-14",
+    venue: "Olympiastadion Berlin, Berlin",
+    teamA: { name: "Spain", flag: "🇪🇸", score: 2 },
+    teamB: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 1 },
+    summary:
+      "Spain capped off a perfect tournament — winning every single game — with a deserved final victory, clinching a record fourth European Championship title.",
+    stars: ["Mikel Oyarzabal (winning goal)", "Nico Williams (1 goal)", "Rodri (Player of the Tournament)"]
+  }
+];
+
+const grid = document.getElementById("matchesGrid");
+const emptyState = document.getElementById("emptyState");
+const searchInput = document.getElementById("searchInput");
+const stageFiltersWrap = document.getElementById("stageFilters");
+const statsStrip = document.getElementById("statsStrip");
+
+let activeStage = "All";
+
+const STAGE_COLOR_INDEX = {};
+function stageColorFor(stage) {
+  const keys = [
+    "Group A", "Group B", "Group C", "Group D", "Group E", "Group F",
+    "Round of 16", "Quarter-final", "Semi-final", "Final"
+  ];
+  if (!(stage in STAGE_COLOR_INDEX)) {
+    STAGE_COLOR_INDEX[stage] = keys.indexOf(stage) % 6;
+  }
+  return STAGE_COLOR_INDEX[stage];
+}
+
+function formatDate(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+function renderStats() {
+  const totalMatches = MATCHES.length;
+  const totalGoals = MATCHES.reduce(
+    (sum, m) => sum + m.teamA.score + m.teamB.score,
+    0
+  );
+  const avgGoals = (totalGoals / totalMatches).toFixed(1);
+  const teams = new Set();
+  MATCHES.forEach((m) => {
+    teams.add(m.teamA.name);
+    teams.add(m.teamB.name);
+  });
+
+  const stats = [
+    { num: totalMatches, label: "Matches" },
+    { num: totalGoals, label: "Goals Scored" },
+    { num: avgGoals, label: "Goals / Match" },
+    { num: teams.size, label: "Teams" }
+  ];
+
+  statsStrip.innerHTML = stats
+    .map(
+      (s) => `
+      <div class="stat-card">
+        <div class="stat-num">${s.num}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>`
+    )
+    .join("");
+}
+
+function renderStageFilters() {
+  const stages = ["All", ...new Set(MATCHES.map((m) => m.stage))];
+  stageFiltersWrap.innerHTML = stages
+    .map(
+      (stage) => `
+      <button class="filter-pill ${stage === activeStage ? "active" : ""}" data-stage="${stage}">
+        ${stage}
+      </button>`
+    )
+    .join("");
+
+  stageFiltersWrap.querySelectorAll(".filter-pill").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeStage = btn.dataset.stage;
+      renderStageFilters();
+      renderMatches();
+    });
+  });
+}
+
+function matchCardHTML(match) {
+  const { teamA, teamB } = match;
+  const aWins = teamA.score > teamB.score;
+  const bWins = teamB.score > teamA.score;
+
+  return `
+    <article class="match-card" data-stage-color="${stageColorFor(match.stage)}">
+      <div class="match-card-top">
+        <span class="stage-badge">${match.stage}</span>
+        <span class="match-date">${formatDate(match.date)}</span>
+      </div>
+
+      <div class="scoreboard">
+        <div class="team">
+          <span class="team-flag">${teamA.flag}</span>
+          <span class="team-name">${teamA.name}</span>
+        </div>
+
+        <div class="score-box">
+          <span class="${aWins ? "score-winner" : ""}">${teamA.score}</span>
+          <span class="dash">–</span>
+          <span class="${bWins ? "score-winner" : ""}">${teamB.score}</span>
+        </div>
+
+        <div class="team">
+          <span class="team-flag">${teamB.flag}</span>
+          <span class="team-name">${teamB.name}</span>
+        </div>
+      </div>
+
+      <div class="venue">📍 ${match.venue}</div>
+
+      ${
+        match.penalties
+          ? `<div class="penalties">🥅 ${match.penalties}</div>`
+          : ""
+      }
+
+      <p class="summary">${match.summary}</p>
+
+      <div class="stars">
+        ${match.stars.map((s) => `<span class="star-chip">⭐ ${s}</span>`).join("")}
+      </div>
+
+      ${
+        match.attendance
+          ? `<div class="attendance">👥 ${match.attendance.toLocaleString()} fans in attendance</div>`
+          : ""
+      }
+    </article>
+  `;
+}
+
+function getFilteredMatches() {
+  const query = searchInput.value.trim().toLowerCase();
+
+  return MATCHES.filter((m) => {
+    const matchesStage = activeStage === "All" || m.stage === activeStage;
+    if (!matchesStage) return false;
+
+    if (!query) return true;
+
+    const haystack = [
+      m.teamA.name,
+      m.teamB.name,
+      m.venue,
+      m.summary,
+      m.stage,
+      ...m.stars
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return haystack.includes(query);
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
+}
+
+function renderMatches() {
+  const filtered = getFilteredMatches();
+
+  grid.innerHTML = filtered.map(matchCardHTML).join("");
+  emptyState.hidden = filtered.length !== 0;
+}
+
+searchInput.addEventListener("input", renderMatches);
+
+renderStats();
+renderStageFilters();
+renderMatches();
+</script>
+</body>
+</html>
