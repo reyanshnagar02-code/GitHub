@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UEFA Euro 2024 Match Summaries</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-ball">⚽</span>
+        <h1>UEFA Euro <span>2024 Central</span></h1>
+      </div>
+      <p class="tagline">Germany 2024 — every big match, summed up in plain English.</p>
+    </div>
+    <div class="header-blob header-blob--1"></div>
+    <div class="header-blob header-blob--2"></div>
+    <div class="header-blob header-blob--3"></div>
+  </header>
+
+  <main>
+    <section class="stats-strip" id="statsStrip">
+      <!-- filled by script.js -->
+    </section>
+
+    <section class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by team, stadium, or player..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="filter-wrap" id="stageFilters">
+        <!-- filled by script.js -->
+      </div>
+    </section>
+
+    <section class="matches-grid" id="matchesGrid">
+      <!-- match cards injected by script.js -->
+    </section>
+
+    <p class="empty-state" id="emptyState" hidden>
+      😕 No matches found. Try a different search or filter.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      🏆 Spain went the whole tournament unbeaten in all 7 games to win a
+      record 4th European Championship title. This is a curated set of
+      the tournament's key matches (all group winners' openers plus the
+      full knockout stage) — add more group games in
+      <code>matches.js</code> using the same format.
+    </p>
+  </footer>
+
+  <script src="matches.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
