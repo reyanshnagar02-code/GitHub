@@ -1,0 +1,286 @@
+:root {
+  --teal: #0f766e;
+  --teal-dark: #0b5750;
+  --terracotta: #e0693a;
+  --terracotta-dark: #c1522a;
+  --cream: #fff8f1;
+  --ink: #2b2420;
+  --muted: #7a6f66;
+  --card-bg: #ffffff;
+  --border: #ece2d6;
+  --radius: 16px;
+  --shadow: 0 6px 20px rgba(43, 36, 32, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 17px;
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: #fff;
+  padding: 28px 16px;
+}
+.header-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo-icon { font-size: 2.5rem; }
+.site-header h1 { margin: 0 0 4px; font-size: 1.6rem; }
+.tagline { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+
+/* Reminder card */
+.reminder-card {
+  margin-top: 24px;
+  background: #fff4e9;
+  border: 2px solid var(--terracotta);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow);
+}
+.reminder-icon { font-size: 2.2rem; flex-shrink: 0; }
+.reminder-label {
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--terracotta-dark);
+}
+.reminder-main { margin: 0; font-size: 1.15rem; font-weight: 600; }
+.reminder-card.now {
+  background: #e9f7ee;
+  border-color: #2f9e5c;
+}
+.reminder-card.now .reminder-label { color: #227a45; }
+.reminder-card.empty {
+  background: #f3f0ec;
+  border-color: var(--border);
+}
+.reminder-card.empty .reminder-label { color: var(--muted); }
+
+/* Layout */
+.layout {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 800px) {
+  .layout { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+.card h2 { margin-top: 0; font-size: 1.25rem; }
+
+/* Form */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+legend {
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding: 0;
+}
+.who-choices {
+  display: flex;
+  gap: 12px;
+}
+.who-option {
+  flex: 1;
+  position: relative;
+}
+.who-option input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+.who-option span {
+  display: block;
+  text-align: center;
+  padding: 14px 8px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all 0.15s ease;
+}
+.who-option input:checked + span {
+  border-color: var(--teal);
+  background: #eafaf6;
+  color: var(--teal-dark);
+}
+.who-option input:focus-visible + span {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.optional { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+.hint { margin: 6px 2px 0; color: var(--muted); font-size: 0.9rem; min-height: 1.2em; }
+
+.time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-error {
+  color: #b3261e;
+  font-weight: 600;
+  min-height: 1.2em;
+  margin: 4px 0 12px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--terracotta);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover { background: var(--terracotta-dark); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--teal-dark);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+/* Bookings list */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.booking-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.booking-item {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 5px solid var(--teal);
+}
+.booking-item.who-papa { border-left-color: #3b6fd6; }
+.booking-item.who-mumma { border-left-color: #d63b8c; }
+.booking-item.ongoing { background: #e9f7ee; }
+
+.booking-avatar {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.booking-info { flex: 1; min-width: 0; }
+.booking-who { font-weight: 700; margin: 0; }
+.booking-when { margin: 2px 0 0; color: var(--muted); font-size: 0.9rem; }
+.booking-note { margin: 4px 0 0; font-style: italic; font-size: 0.9rem; }
+.badge-now {
+  display: inline-block;
+  margin-left: 8px;
+  background: #2f9e5c;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+.btn-cancel {
+  border: 1px solid #b3261e;
+  color: #b3261e;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.btn-cancel:hover { background: #fdecea; }
+
+.empty-state {
+  color: var(--muted);
+  padding: 12px 4px;
+  text-align: center;
+}
+
+.past-section { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+.past-section h3 { margin: 0 0 8px; font-size: 1rem; color: var(--muted); }
+.booking-list--past .booking-item { opacity: 0.7; }
+.hidden { display: none; }
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px 16px;
+  font-size: 0.9rem;
+}

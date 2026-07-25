@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Room Booking</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo-icon">🚪</span>
+      <div>
+        <h1>Our Room Booking</h1>
+        <p class="tagline">Book the room for Mumma or Papa — pick a day, date and time.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Next up reminder -->
+    <section class="reminder-card" id="reminderCard" aria-live="polite">
+      <span class="reminder-icon" id="reminderIcon">📌</span>
+      <div class="reminder-text">
+        <p class="reminder-label" id="reminderLabel">Next up</p>
+        <p class="reminder-main" id="reminderMain">Loading…</p>
+      </div>
+    </section>
+
+    <div class="layout">
+      <!-- Booking form -->
+      <section class="card form-card">
+        <h2>Book the Room</h2>
+        <form id="bookingForm" novalidate>
+
+          <fieldset class="who-fieldset">
+            <legend>Who is booking?</legend>
+            <div class="who-choices">
+              <label class="who-option">
+                <input type="radio" name="who" value="Mumma" required />
+                <span>👩 Mumma</span>
+              </label>
+              <label class="who-option">
+                <input type="radio" name="who" value="Papa" required />
+                <span>👨 Papa</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required />
+            <p class="hint" id="dayHint"></p>
+          </div>
+
+          <div class="time-row">
+            <div class="field">
+              <label for="startTime">Start time</label>
+              <input type="time" id="startTime" name="startTime" required />
+            </div>
+            <div class="field">
+              <label for="endTime">End time</label>
+              <input type="time" id="endTime" name="endTime" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="note">What for? <span class="optional">(optional)</span></label>
+            <input type="text" id="note" name="note" maxlength="60" placeholder="e.g. Video call, Nap time, Reading" />
+          </div>
+
+          <p class="form-error" id="formError" role="alert"></p>
+
+          <button type="submit" class="btn-primary">Book the Room</button>
+        </form>
+      </section>
+
+      <!-- Bookings list -->
+      <section class="card list-card">
+        <div class="list-header">
+          <h2>Upcoming Bookings</h2>
+          <button type="button" class="btn-link" id="togglePastBtn">Show past bookings</button>
+        </div>
+        <ul class="booking-list" id="upcomingList">
+          <li class="empty-state">No bookings yet.</li>
+        </ul>
+
+        <div id="pastSection" class="past-section hidden">
+          <h3>Past Bookings</h3>
+          <ul class="booking-list booking-list--past" id="pastList">
+            <li class="empty-state">No past bookings.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with ❤️ for Mumma &amp; Papa</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
