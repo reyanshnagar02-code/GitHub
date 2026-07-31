@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+server/data/*.db
+server/data/*.db-journal
+server/data/*.db-wal
+server/data/*.db-shm
+server/uploads/*
+!server/uploads/.gitkeep
+!server/uploads/placeholder-issue.svg
+!server/uploads/placeholder-resolved.svg
+*.log
+.DS_Store
