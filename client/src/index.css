@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-navy-950 text-white antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-teal-400 px-5 py-2.5 font-semibold text-navy-950 transition hover:bg-teal-300 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-teal-400/40 bg-transparent px-5 py-2.5 font-semibold text-teal-300 transition hover:border-teal-400 hover:bg-teal-400/10 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .card {
+    @apply rounded-xl border border-white/10 bg-navy-800/60 shadow-glow backdrop-blur;
+  }
+  .input {
+    @apply w-full rounded-lg border border-white/10 bg-navy-900 px-3.5 py-2.5 text-sm text-white placeholder-white/40 outline-none transition focus:border-teal-400 focus:ring-1 focus:ring-teal-400;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-white/70;
+  }
+}
+
+.leaflet-container {
+  background: #0a1420 !important;
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1420;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a4f;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2dd4bf55;
+}
