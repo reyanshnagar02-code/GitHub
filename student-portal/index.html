@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">🎓 Student Portal</div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="home">Home</button>
+    <button class="tab-btn" data-tab="academics">Academics</button>
+    <button class="tab-btn" data-tab="transport">Transport &amp; Carpool</button>
+    <button class="tab-btn" data-tab="calendar">Calendar</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <section id="home" class="tab-panel active">
+    <div class="panel-grid">
+      <div class="card">
+        <h2>My Profile</h2>
+        <form id="profile-form">
+          <label>Name
+            <input type="text" id="pf-name" placeholder="Your full name" required>
+          </label>
+          <label>Section / Class
+            <input type="text" id="pf-section" placeholder="e.g. 10-B" required>
+          </label>
+          <label>Mode of transport
+            <select id="pf-transport">
+              <option value="bus">School Bus</option>
+              <option value="carpool">Carpool</option>
+              <option value="public">Public Transport</option>
+              <option value="walk">Walk</option>
+              <option value="self">Self / Bike / Dropped off</option>
+            </select>
+          </label>
+          <label id="pf-busmoney-wrap" class="hidden">
+            Bus money paid (for the term)
+            <input type="number" id="pf-busmoney" placeholder="e.g. 1500" min="0" step="0.01">
+          </label>
+          <button type="submit">Save Profile</button>
+        </form>
+      </div>
+
+      <div class="card" id="profile-summary-card">
+        <h2>Summary</h2>
+        <div id="profile-summary" class="summary-box">
+          <p class="muted">No profile saved yet. Fill the form to get started.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACADEMICS ================= -->
+  <section id="academics" class="tab-panel">
+    <div class="card">
+      <h2>My Timetable</h2>
+      <div class="day-tabs" id="day-tabs"></div>
+      <table class="timetable-table">
+        <thead>
+          <tr><th>Time</th><th>Subject / Period</th><th>What I need</th><th></th></tr>
+        </thead>
+        <tbody id="timetable-body"></tbody>
+      </table>
+      <form id="period-form" class="inline-form">
+        <input type="text" id="pr-time" placeholder="Time (e.g. 9:00-9:45)" required>
+        <input type="text" id="pr-subject" placeholder="Subject / period" required>
+        <input type="text" id="pr-needs" placeholder="What you need (books, kit, etc.)">
+        <button type="submit">Add Period</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Upcoming Assignments</h2>
+      <form id="assignment-form" class="inline-form">
+        <input type="text" id="as-subject" placeholder="Subject" required>
+        <input type="text" id="as-title" placeholder="Assignment title" required>
+        <input type="date" id="as-due" required>
+        <button type="submit">Add Assignment</button>
+      </form>
+      <ul id="assignment-list" class="list"></ul>
+    </div>
+  </section>
+
+  <!-- ================= TRANSPORT ================= -->
+  <section id="transport" class="tab-panel">
+
+    <div class="card">
+      <h2>How do you get to school?</h2>
+      <p class="muted">This sets your transport mode across the portal (also shown on the Home screen).</p>
+      <div id="transport-mode-buttons" class="mode-buttons">
+        <button data-mode="bus">🚌 School Bus</button>
+        <button data-mode="carpool">🚗 Carpool</button>
+        <button data-mode="public">🚉 Public Transport</button>
+        <button data-mode="walk">🚶 Walk</button>
+        <button data-mode="self">🏠 Self / Dropped off</button>
+      </div>
+      <p id="current-mode-label" class="muted"></p>
+    </div>
+
+    <div class="card">
+      <h2>Carpool Board</h2>
+      <form id="carpool-form" class="inline-form">
+        <input type="text" id="cp-name" placeholder="Your name" required>
+        <input type="text" id="cp-route" placeholder="Area / route" required>
+        <select id="cp-type">
+          <option value="offer">Offering a ride</option>
+          <option value="request">Looking for a ride</option>
+        </select>
+        <input type="number" id="cp-seats" placeholder="Seats available" min="0">
+        <input type="text" id="cp-contact" placeholder="Contact info" required>
+        <button type="submit">Post</button>
+      </form>
+      <ul id="carpool-list" class="list"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Running Late? Notify a Teacher</h2>
+      <p class="muted">For students taking public transport (or anyone stuck) — let your teacher know you're on the way.</p>
+      <form id="late-form" class="inline-form">
+        <input type="text" id="lt-teacher" placeholder="Teacher name" required>
+        <input type="text" id="lt-eta" placeholder="Expected arrival (e.g. 9:20 AM)" required>
+        <input type="text" id="lt-reason" placeholder="Reason (optional)">
+        <button type="submit">Send Notice</button>
+      </form>
+      <ul id="late-list" class="list"></ul>
+    </div>
+
+    <div class="card">
+      <h2>School Bus Directory</h2>
+      <table class="bus-table">
+        <thead>
+          <tr><th>Bus No.</th><th>Route</th><th>Pickup Time</th><th>Stops</th><th></th></tr>
+        </thead>
+        <tbody id="bus-body"></tbody>
+      </table>
+      <form id="bus-form" class="inline-form">
+        <input type="text" id="bs-no" placeholder="Bus No." required>
+        <input type="text" id="bs-route" placeholder="Route name" required>
+        <input type="text" id="bs-time" placeholder="Pickup time" required>
+        <input type="text" id="bs-stops" placeholder="Stops (comma separated)">
+        <button type="submit">Add Bus</button>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- ================= CALENDAR ================= -->
+  <section id="calendar" class="tab-panel">
+    <div class="card">
+      <div class="calendar-header">
+        <button id="cal-prev">&larr;</button>
+        <h2 id="cal-month-label"></h2>
+        <button id="cal-next">&rarr;</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <div class="card">
+      <h2 id="cal-events-title">Events</h2>
+      <form id="event-form" class="inline-form">
+        <input type="date" id="ev-date" required>
+        <input type="text" id="ev-title" placeholder="Event title" required>
+        <button type="submit">Add Event</button>
+      </form>
+      <ul id="event-list" class="list"></ul>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
