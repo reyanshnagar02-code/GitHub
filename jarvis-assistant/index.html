@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>J.A.R.V.I.S. — Personal AI Assistant</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="core-glow"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="ring ring--outer"></span>
+        <span class="ring ring--inner"></span>
+        <span class="core"></span>
+      </div>
+      <div class="title-block">
+        <h1>J.A.R.V.I.S.</h1>
+        <p class="tagline">Just A Rather Very Intelligent System</p>
+      </div>
+      <div class="status" id="status">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">Standing by</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="chat-panel">
+      <div class="chat-log" id="chatLog"></div>
+
+      <form class="composer" id="composer">
+        <button type="button" id="micBtn" class="mic-btn" title="Voice input">🎙️</button>
+        <input
+          id="userInput"
+          type="text"
+          placeholder="Say something, sir..."
+          autocomplete="off"
+        />
+        <button type="submit" class="send-btn">Send</button>
+      </form>
+
+      <div class="quick-actions" id="quickActions">
+        <!-- filled by app.js -->
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="widget" id="clockWidget">
+        <h3>Time</h3>
+        <div class="clock" id="clockDisplay">--:--:--</div>
+        <div class="date" id="dateDisplay">-</div>
+      </div>
+
+      <div class="widget" id="notesWidget">
+        <h3>Notes / Reminders</h3>
+        <ul id="notesList"></ul>
+        <p class="hint">Try: "note buy milk" · "remind me to call John" · "clear notes"</p>
+      </div>
+
+      <div class="widget" id="voiceWidget">
+        <h3>Voice</h3>
+        <label class="toggle">
+          <input type="checkbox" id="voiceToggle" checked />
+          <span>Speak replies aloud</span>
+        </label>
+        <p class="hint">Voice input needs Chrome/Edge over HTTPS (or localhost).</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      ⚡ Runs entirely in your browser — no server, no API key. Speech
+      recognition/synthesis via the Web Speech API when supported.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
